@@ -4,112 +4,136 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Health Symptom Self-Checker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="print.css">
+  <link rel="stylesheet" href="css/print.css">
 </head>
 <body>
 
-  <!-- SCREEN 1: Welcome -->
-  <div id="screen-welcome" class="screen active">
-    <div class="card">
-      <div class="app-logo">🩺</div>
-      <h1>Symptom Self-Checker</h1>
-      <p class="subtitle">Answer a few questions and get general health guidance. <strong>Not a medical diagnosis.</strong></p>
-
-      <div class="form-group">
-        <label for="user-name">Your name</label>
-        <input type="text" id="user-name" placeholder="e.g. Manjunath" autocomplete="given-name">
-      </div>
-      <div class="form-group">
-        <label for="user-age">Your age</label>
-        <input type="number" id="user-age" placeholder="e.g. 20" min="1" max="120">
-      </div>
-
-      <button id="btn-start" class="btn btn-primary">Start Check →</button>
-      <p class="disclaimer">⚠ For emergency situations, call 112 immediately.</p>
-    </div>
-  </div>
-
-  <!-- SCREEN 2: Category Selection -->
-  <div id="screen-category" class="screen hidden">
-    <div class="card">
-      <h2>What's bothering you most?</h2>
-      <p class="subtitle">Select the main symptom</p>
-      <div class="category-grid">
-        <button class="cat-btn" data-cat="fever">🌡 Fever</button>
-        <button class="cat-btn" data-cat="headache">🤕 Headache</button>
-        <button class="cat-btn" data-cat="cold">🤧 Cold / Cough</button>
-        <button class="cat-btn" data-cat="stomach">🤢 Stomach</button>
-        <button class="cat-btn" data-cat="throat">😮 Sore Throat</button>
-        <button class="cat-btn" data-cat="fatigue">😴 Fatigue</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCREEN 3: Quiz Questions -->
-  <div id="screen-quiz" class="screen hidden">
-    <div class="card">
-
-      <!-- Progress bar -->
-      <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-fill" id="progress-fill"></div>
+  <div class="app-container">
+    <!-- Visual Side Panel (Desktop left / Mobile top banner) -->
+    <div class="side-panel">
+      <div class="side-panel-overlay"></div>
+      <div class="side-panel-content">
+        <div class="side-logo">🩺</div>
+        <span class="side-tag">Clinically Guided Self-Checker</span>
+        <h1>Your Health is in Safe Hands</h1>
+        <p>Get instant guidance based on your symptoms. Created by medical professionals to help you monitor warnings and know when to consult a doctor.</p>
+        <div class="side-features">
+          <div class="feature-item"><span>✓</span> 6 Symptom Categories</div>
+          <div class="feature-item"><span>✓</span> Instant Warning Analysis</div>
+          <div class="feature-item"><span>✓</span> Print / Save PDF Reports</div>
         </div>
-        <span class="progress-text" id="progress-text">Question 1 of 5</span>
       </div>
-
-      <!-- Question -->
-      <div class="question-area">
-        <p class="question-label">Question</p>
-        <h2 id="question-text">Loading question...</h2>
-      </div>
-
-      <!-- Answer buttons -->
-      <div class="answer-buttons">
-        <button class="btn btn-yes" id="btn-yes">✓ Yes</button>
-        <button class="btn btn-no" id="btn-no">✗ No</button>
-      </div>
-
-      <button class="btn btn-back" id="btn-back">← Go back</button>
     </div>
+
+    <!-- Main Content Area where screens are toggled -->
+    <main class="main-content">
+      <!-- SCREEN 1: Welcome -->
+      <div id="screen-welcome" class="screen active fade-in">
+        <div class="card">
+          <div class="app-logo">🩺</div>
+          <h2>Symptom Self-Checker</h2>
+          <p class="subtitle">Answer a few questions and get general health guidance. <strong>Not a medical diagnosis.</strong></p>
+
+          <div class="form-group">
+            <label for="user-name">Your name</label>
+            <input type="text" id="user-name" placeholder="e.g. Manjunath" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="user-age">Your age</label>
+            <input type="number" id="user-age" placeholder="e.g. 20" min="1" max="120">
+          </div>
+
+          <button id="btn-start" class="btn btn-primary">Start Check →</button>
+          <p class="disclaimer">⚠ For emergency situations, call 112 immediately.</p>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: Category Selection -->
+      <div id="screen-category" class="screen">
+        <div class="card">
+          <h2>What's bothering you most?</h2>
+          <p class="subtitle">Select the main symptom</p>
+          <div class="category-grid">
+            <button class="cat-btn" data-cat="fever">🌡 Fever</button>
+            <button class="cat-btn" data-cat="headache">🤕 Headache</button>
+            <button class="cat-btn" data-cat="cold">🤧 Cold / Cough</button>
+            <button class="cat-btn" data-cat="stomach">🤢 Stomach</button>
+            <button class="cat-btn" data-cat="throat">😮 Sore Throat</button>
+            <button class="cat-btn" data-cat="fatigue">😴 Fatigue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: Quiz Questions -->
+      <div id="screen-quiz" class="screen">
+        <div class="card">
+
+          <!-- Progress bar -->
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <span class="progress-text" id="progress-text">Question 1 of 5</span>
+          </div>
+
+          <!-- Question -->
+          <div class="question-area">
+            <p class="question-label">Question</p>
+            <h2 id="question-text">Loading question...</h2>
+          </div>
+
+          <!-- Answer buttons -->
+          <div class="answer-buttons">
+            <button class="btn btn-yes" id="btn-yes">✓ Yes</button>
+            <button class="btn btn-no" id="btn-no">✗ No</button>
+          </div>
+
+          <button class="btn btn-back" id="btn-back">← Go back</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: Result -->
+      <div id="screen-result" class="screen">
+        <div class="card" id="printable-area">
+
+          <div class="result-header">
+            <p id="result-greeting">Results for Manjunath</p>
+            <div class="severity-badge" id="severity-badge">Mild</div>
+          </div>
+
+          <h2 id="result-title">Rest and stay hydrated</h2>
+          <p id="result-summary">Based on your answers...</p>
+
+          <div class="guidance-box">
+            <h3>What you can do</h3>
+            <ul id="result-tips"></ul>
+          </div>
+
+          <div class="doctor-box" id="doctor-box">
+            <h3>⚕ When to see a doctor</h3>
+            <p id="result-doctor-advice"></p>
+          </div>
+
+          <div class="disclaimer-box">
+            <p>⚠ <strong>Disclaimer:</strong> This tool provides general information only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider.</p>
+          </div>
+
+        </div>
+
+        <div class="result-actions no-print">
+          <button class="btn btn-primary" id="btn-print">🖨 Print / Save PDF</button>
+          <button class="btn btn-secondary" id="btn-restart">↺ Check Again</button>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <!-- SCREEN 4: Result -->
-  <div id="screen-result" class="screen hidden">
-    <div class="card" id="printable-area">
-
-      <div class="result-header">
-        <p id="result-greeting">Results for Manjunath</p>
-        <div class="severity-badge" id="severity-badge">Mild</div>
-      </div>
-
-      <h2 id="result-title">Rest and stay hydrated</h2>
-      <p id="result-summary">Based on your answers...</p>
-
-      <div class="guidance-box">
-        <h3>What you can do</h3>
-        <ul id="result-tips"></ul>
-      </div>
-
-      <div class="doctor-box" id="doctor-box">
-        <h3>⚕ When to see a doctor</h3>
-        <p id="result-doctor-advice"></p>
-      </div>
-
-      <div class="disclaimer-box">
-        <p>⚠ <strong>Disclaimer:</strong> This tool provides general information only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider.</p>
-      </div>
-
-    </div>
-
-    <div class="result-actions no-print">
-      <button class="btn btn-primary" id="btn-print">🖨 Print / Save PDF</button>
-      <button class="btn btn-secondary" id="btn-restart">↺ Check Again</button>
-    </div>
-  </div>
-
-  <script src="questions.js"></script>
-  <script src="results.js"></script>
-  <script src="app.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/results.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
